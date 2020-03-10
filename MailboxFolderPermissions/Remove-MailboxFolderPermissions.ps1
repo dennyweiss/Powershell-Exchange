@@ -63,17 +63,6 @@ $exclusions = @("/Sync Issues",
                 "/Versions"
                 )
 
-
-#...................................
-# Initialize
-#...................................
-
-#Set scope to include entire forest
-if (!(Get-ADServerSettings).ViewEntireForest)
-{
-	Set-ADServerSettings -ViewEntireForest $true -WarningAction SilentlyContinue
-}
-
 #...................................
 # Script
 #...................................
