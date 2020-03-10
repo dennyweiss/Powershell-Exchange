@@ -68,30 +68,11 @@ $exclusions = @("/Sync Issues",
 # Initialize
 #...................................
 
-#Add Exchange 2010 snapin if not already loaded in the PowerShell session
-if (!(Get-PSSnapin | where {$_.Name -eq "Microsoft.Exchange.Management.PowerShell.E2010"}))
-{
-	try
-	{
-		Add-PSSnapin Microsoft.Exchange.Management.PowerShell.E2010 -ErrorAction STOP
-	}
-	catch
-	{
-		#Snapin was not loaded
-		Write-Warning $_.Exception.Message
-		EXIT
-	}
-	. $env:ExchangeInstallPath\bin\RemoteExchange.ps1
-	Connect-ExchangeServer -auto -AllowClobber
-}
-
-
 #Set scope to include entire forest
 if (!(Get-ADServerSettings).ViewEntireForest)
 {
 	Set-ADServerSettings -ViewEntireForest $true -WarningAction SilentlyContinue
 }
-
 
 #...................................
 # Script
